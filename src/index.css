@@ -12,9 +12,10 @@ a {
 .App {
   position: relative;
   background-color: black;
-  overflow: hidden;
   width: 100vw;
   height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 body {
@@ -25,22 +26,4 @@ body {
 
 #masked video {
   filter: grayscale();
-}
-
-.lorem {
-  position: absolute;
-  color: white;
-  width: 630px;
-  top: 15%;
-  right: 20%;
-  font-size: 1rem;
-  line-height: 1.5;
-  display: flex;
-  justify-content: space-between;
-  opacity: 0;
-}
-
-.lorem p {
-  margin-left: 0.5rem;
-  max-width: 300px;
 }

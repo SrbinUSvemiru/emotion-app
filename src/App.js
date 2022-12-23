@@ -12,6 +12,7 @@ import {
 import { Wrapper } from "./styled-components";
 import HeroPage from "./Components/HeroPage/HeroPage";
 import Work from "./Components/Work/Work";
+import About from "./Components/About/About";
 import "./index.css";
 
 function App() {
@@ -20,7 +21,6 @@ function App() {
 
   useEffect(() => {
     setPathName(location.pathname);
-    console.log("set");
   }, [location]);
 
   const transition = useTransition(location.pathname, {
@@ -36,6 +36,7 @@ function App() {
           <Routes location={item}>
             <Route path="/" element={<HeroPage />} />
             <Route path="/work" element={<Work />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </Wrapper>
       ))}

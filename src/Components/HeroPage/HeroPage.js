@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Header,
-  Work,
-  About,
+  Buttons,
   Hero,
   Showreel,
   Endtag,
@@ -11,6 +10,11 @@ import {
   Button,
   BackButton,
   Masked,
+  Container,
+  HeadingParagraph,
+  HeaderRow,
+  ArrowButtonsRow,
+  AnimatedParagraph,
 } from "./styled-components";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";
@@ -27,7 +31,7 @@ import {
 
 function HeroPage() {
   const headerRef = useRef();
-  const [height, setHeight] = useState();
+
   const [isPaused, setIsPaused] = useState(false);
   const [position, setPosition] = useState(false);
   const [maskedBorder, setMaskedBorder] = useState(false);
@@ -57,7 +61,7 @@ function HeroPage() {
   });
 
   const showreelRef = useSpringRef();
-  const y = useSpring({
+  const showreel = useSpring({
     ref: showreelRef,
     config: { mass: 1, tension: 280, friction: 60 },
     from: { y: -400, scale: "70%", opacity: 0, x: 0 },
@@ -71,7 +75,6 @@ function HeroPage() {
   });
 
   useEffect(() => {
-    setHeight(headerRef.current.clientHeight);
     setShowreelData(Beginning);
     springRef.start();
     showreelRef.start();
@@ -79,7 +82,6 @@ function HeroPage() {
 
   const handleSwitch = () => {
     setShowreelData(CirclesJson);
-    console.log("end");
   };
 
   const handlePosition = useCallback(() => {
@@ -111,6 +113,16 @@ function HeroPage() {
     });
   }, [position]);
 
+  const handleDownButton = () => {
+    setMaskedBorder(!maskedBorder);
+    showreelRef.start({
+      to: { y: -700 },
+    });
+    springRef.start({
+      to: { y: -400 },
+    });
+  };
+
   const maskStyle = useSpring({
     config: { mass: 1, tension: 280, friction: 60 },
     from: { borderRadius: "50%", scale: "100%" },
@@ -139,7 +151,7 @@ function HeroPage() {
   // useChain([springRef, showreelRef], [0.3, 2.2]);
 
   return (
-    <>
+    <Container>
       <BackButton
         style={backButton}
         onClick={handlePositionBack}
@@ -147,42 +159,46 @@ function HeroPage() {
       >
         Back
       </BackButton>
-      <Endtag>
-        <Lottie animationData={EndtagIcon} loop={false} isPaused={isPaused} />
-      </Endtag>
+
       <Header ref={headerRef} style={x}>
-        <div id="row">
-          <div className="heading">
-            <p id="heading-paragraph">
-              Motion designer that loves telling stories
-              <br /> through creative movement and sound
-            </p>
-          </div>
+        <HeaderRow>
+          <Endtag>
+            <Lottie
+              animationData={EndtagIcon}
+              loop={false}
+              isPaused={isPaused}
+            />
+          </Endtag>
+          <HeadingParagraph>
+            Motion designer that loves telling stories
+            <br /> through creative movement and sound
+          </HeadingParagraph>
           <div className="right">
             <Link to="/work">
-              <Work id="work">Work</Work>
+              <Buttons>Work</Buttons>
             </Link>
-            <About>About</About>
+            <Link to="/about">
+              <Buttons>About</Buttons>
+            </Link>
           </div>
-        </div>
+        </HeaderRow>
 
-        <animated.div id="arrow-buttons" style={arrowButtons}>
-          <Button
-            onClick={() => setMaskedBorder(!maskedBorder)}
-            disabled={backButtonActive}
-          >
-            D
-          </Button>
-          <Button onClick={handlePosition} disabled={backButtonActive}>
-            R
-          </Button>
-        </animated.div>
+        <ArrowButtonsRow>
+          <animated.div id="arrow-buttons" style={arrowButtons}>
+            <Button onClick={handleDownButton} disabled={backButtonActive}>
+              D
+            </Button>
+            <Button onClick={handlePosition} disabled={backButtonActive}>
+              R
+            </Button>
+          </animated.div>
+        </ArrowButtonsRow>
       </Header>
-      <Hero height={height}>
-        <Showreel style={y}>
+      <Hero>
+        <Showreel style={showreel}>
           <Masked style={maskStyle}>
             <video muted autoPlay loop>
-              <source src="vid_0.mp4" type="video/mp4" />
+              <source src="Reel.mp4" type="video/mp4" />
             </video>
           </Masked>
           <Circles>
@@ -193,33 +209,25 @@ function HeroPage() {
             />
           </Circles>
         </Showreel>
-
-        <animated.div className="lorem" style={z}>
+        <AnimatedParagraph style={z}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
-            non quis exercitationem culpa nesciunt nihil aut nostrum explicabo
-            reprehenderit optio amet ab temporibus asperiores quasi cupiditate.
-            Voluptatum ducimus voluptates voluptas?Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Eligendi non quis exercitationem culpa
-            nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab
-            temporibus asperiores quasi cupiditate. Voluptatum ducimus
-            voluptates voluptas? Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Eligendi non quis exercitationem culpa nesciunt
-            nihil
+            <span>O</span>ne thing that all of us share is our ability to listen
+            to and tell them. Life is a stream full of various beautiful ones,
+            tiny and large. They hold a pristine power to transform an inspire
+            our perspective. They are the strands that connect us all with the
+            stars in our eyes and the corners of our smile. The warm light
+            inside the simple wooden home amidst the harsh snowy winter.
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
-            non quis exercitationem culpa nesciunt nihil aut nostrum explicabo
-            reprehenderit optio amet ab temporibus asperiores quasi cupiditate.
-            Voluptatum ducimus voluptates voluptas?Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Eligendi non quis exercitationem culpa
-            nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab
-            temporibus asperiores quasi cupiditate. Voluptatum ducimus
-            voluptates voluptas?
+            On the brisk breeze that makes us close our eyes for a moment, on
+            those hot summer days, Through them we can shape, lighten, give
+            purpose, connect, befriend and amaze... And sometimes if we are
+            lucky, bring pqople together. We all live them, but if we put our
+            heart and mind to it, there is a chance to tell a wonderful story.
           </p>
-        </animated.div>
+        </AnimatedParagraph>
       </Hero>
-    </>
+    </Container>
   );
 }
 

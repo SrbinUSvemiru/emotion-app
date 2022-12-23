@@ -1,45 +1,55 @@
 import styled from "styled-components";
 import { animated } from "react-spring";
 
+export const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  margin: 0 auto;
+`;
+
 export const Header = styled(animated.div)`
   width: 100%;
   background: black;
   padding-left: 50px;
   position: relative;
-  z-index: 5;
-  & #heading-paragraph {
-    font-weight: "400";
-    margin-left: 20rem;
-  }
-  & .heading {
-    color: white;
-    font-size: 1.87rem;
-    display: flex;
-  }
-  &  .right {
+  z-index: 50;
+
+  & .right {
     margin-right: 7rem;
     display: flex;
     font-weight: 500;
-    
-    }
   }
-  & #row{
+
+  & #arrow-buttons {
     display: flex;
-    align-items: flex-start;
+    width: 130px;
     justify-content: space-between;
-    width: 100%;
-    padding-top: 50px;
   }
-  & #arrow-buttons{
-    position: absolute;
-  z-index: 15;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 12.5rem;
+`;
+
+export const HeaderRow = styled.div`
   display: flex;
-  width: 130px;
+  align-items: flex-start;
   justify-content: space-between;
-  }
+  width: 100%;
+  padding-top: 50px;
+`;
+
+export const ArrowButtonsRow = styled(animated.div)`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 80px;
+`;
+
+export const HeadingParagraph = styled.div`
+  font-weight: 400;
+  margin-left: 20rem;
+  color: white;
+  font-size: 1.87rem;
 `;
 
 export const Endtag = styled.div`
@@ -53,7 +63,7 @@ export const Endtag = styled.div`
   left: 50px;
 `;
 
-export const Work = styled.button`
+export const Buttons = styled.div`
   all: unset;
   font-size: 1.5rem;
   color: white;
@@ -81,38 +91,32 @@ export const Work = styled.button`
   }
 `;
 
-export const About = styled.button`
-  all: unset;
-  font-size: 1.5rem;
-  color: white;
-  position: relative;
-  &::after {
-    width: 0%;
-    height: 1px;
-    background: white;
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transition: all 0.1 ease;
-    -webkit-transition: width 0.2s;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
-  &:hover {
-    cursor: pointer;
-    &::after {
-      width: 100%;
-    }
-  }
-`;
-
 export const Hero = styled(animated.div)`
-  height: calc(100vh - 120px);
+  height: 100%;
   width: 100%;
   background: black;
   overflow: hidden;
   position: relative;
+`;
+
+export const AnimatedParagraph = styled(animated.div)`
+  position: absolute;
+  color: white;
+  width: 630px;
+  top: 15%;
+  right: 20%;
+  font-size: 1rem;
+  line-height: 1.5;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  & > p {
+    font-size: 1.2rem;
+    max-width: 300px;
+    & > span {
+      font-weight: 900;
+    }
+  }
 `;
 
 export const Showreel = styled(animated.div)`
@@ -144,8 +148,8 @@ export const Circles = styled.div`
 `;
 
 export const Masked = styled(animated.div)`
-  width: 100%;
   height: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -158,6 +162,9 @@ export const Masked = styled(animated.div)`
   padding: 0;
   overflow: hidden;
   position: relative;
+  & > video {
+    height: 100%;
+  }
 `;
 
 export const Button = styled.button`
