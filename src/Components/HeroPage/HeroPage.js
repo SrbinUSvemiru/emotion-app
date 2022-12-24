@@ -15,6 +15,7 @@ import {
   HeaderRow,
   ArrowButtonsRow,
   AnimatedParagraph,
+  Video,
 } from "./styled-components";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";
@@ -28,13 +29,17 @@ import {
   easings,
   animated,
 } from "react-spring";
+import ReactPlayer from "react-player";
 
 function HeroPage() {
   const headerRef = useRef();
-
+  const [controls, setControls] = useState(false);
+  const [playing, setPlaying] = useState(true);
+  const [playerWidth, setPlayerWidth] = useState(1600);
+  const [playerHeight, setPlayerHeight] = useState(1600);
   const [isPaused, setIsPaused] = useState(false);
   const [position, setPosition] = useState(false);
-  const [maskedBorder, setMaskedBorder] = useState(false);
+
   const [backButtonActive, setBackButtonActive] = useState(false);
   const [showreelData, setShowreelData] = useState();
 
@@ -64,14 +69,22 @@ function HeroPage() {
   const showreel = useSpring({
     ref: showreelRef,
     config: { mass: 1, tension: 280, friction: 60 },
-    from: { y: -400, scale: "70%", opacity: 0, x: 0 },
+    from: { y: -600, scale: "70%", opacity: 0, x: 0 },
     to: {
-      y: 0,
+      y: 250,
       scale: "100%",
       opacity: 1,
       x: 0,
     },
     delay: 1000,
+  });
+
+  const videoRef = useSpringRef();
+  const videoStyle = useSpring({
+    ref: videoRef,
+    config: { mass: 1, tension: 280, friction: 60 },
+    from: { borderRadius: "50%", y: 0 },
+    to: { borderRadius: "0%", y: -300 },
   });
 
   useEffect(() => {
@@ -88,7 +101,7 @@ function HeroPage() {
     setPosition(!position);
     setBackButtonActive(true);
     showreelRef.start({
-      to: { y: -100, x: -900, scale: "100%" },
+      to: { y: -100, x: -900, scale: "90%" },
     });
     springRef.start({
       to: { y: -200, x: -500 },
@@ -101,7 +114,7 @@ function HeroPage() {
     setPosition(!position);
     setBackButtonActive(false);
     showreelRef.start({
-      to: { y: 0, x: 0, scale: "100%" },
+      to: { y: 250, scale: "100%", x: 0 },
     });
     springRef.start({
       to: { y: 0, x: 0 },
@@ -114,30 +127,24 @@ function HeroPage() {
   }, [position]);
 
   const handleDownButton = () => {
-    setMaskedBorder(!maskedBorder);
-    showreelRef.start({
-      to: { y: -700 },
-    });
     springRef.start({
       to: { y: -400 },
     });
+    videoRef.start();
+    setPlaying(false);
+    setControls(true);
+    setTimeout(() => {
+      setPlayerWidth(500);
+      setPlayerHeight(300);
+    }, 500);
   };
-
-  const maskStyle = useSpring({
-    config: { mass: 1, tension: 280, friction: 60 },
-    from: { borderRadius: "50%", scale: "100%" },
-    to: {
-      borderRadius: maskedBorder ? "0%" : "100%",
-      scale: maskedBorder ? "105%" : "100%",
-    },
-  });
 
   const paragraph = useSpringRef();
   const z = useSpring({
     ref: paragraph,
     config: { easing: easings.easeInOutBack },
     from: { opacity: 0, scale: "50%", y: 200, x: 300 },
-    to: { opacity: 1, scale: "100%", y: 0, x: 0 },
+    to: { opacity: 1, scale: "100%", y: -50, x: 100 },
     delay: 100,
     duration: 1000,
   });
@@ -196,11 +203,19 @@ function HeroPage() {
       </Header>
       <Hero>
         <Showreel style={showreel}>
-          <Masked style={maskStyle}>
-            <video muted autoPlay loop>
-              <source src="Reel.mp4" type="video/mp4" />
-            </video>
-          </Masked>
+          <Video style={videoStyle}>
+            <ReactPlayer
+              url="Reel.mp4"
+              playing={playing}
+              id="player"
+              controls={true}
+              muted={true}
+              loop={true}
+              width={playerWidth}
+              height={playerHeight}
+            />
+          </Video>
+
           <Circles>
             <Lottie
               animationData={showreelData}

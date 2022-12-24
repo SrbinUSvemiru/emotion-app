@@ -23,7 +23,3 @@ body {
   font-size: 1rem;
   font-family: "Arimo", sans-serif;
 }
-
-#masked video {
-  filter: grayscale();
-}
