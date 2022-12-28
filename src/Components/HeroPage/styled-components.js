@@ -146,7 +146,7 @@ export const Hero = styled(animated.div)`
 export const AnimatedParagraph = styled(animated.div)`
   position: absolute;
   color: white;
-  width: 630px;
+  max-width: 630px;
   top: 15%;
   right: 20%;
   font-size: 1rem;
@@ -159,6 +159,31 @@ export const AnimatedParagraph = styled(animated.div)`
     max-width: 300px;
     & > span {
       font-weight: 900;
+    }
+  }
+  & p + p {
+    margin-left: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    right: 5%;
+    top: -10%;
+    width: 100%;
+    & p + p {
+      margin-left: 0;
+      margin-top: 2rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    right: 15%;
+    top: -13%;
+    width: 100%;
+    & p + p {
+      margin-left: 0;
+      margin-top: 2rem;
     }
   }
 `;
@@ -204,6 +229,11 @@ export const Circles = styled.div`
   transform: translateY(-50%);
   margin: 0 auto;
   z-index: -1;
+  @media (max-width: 800px) {
+    width: 1200px;
+    height: 1200px;
+    top: 52%;
+  }
 `;
 
 export const Button = styled.button`
