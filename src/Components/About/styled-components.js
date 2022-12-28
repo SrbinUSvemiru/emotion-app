@@ -11,8 +11,9 @@ export const Container = styled.div`
 export const Header = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 4.5vh;
+  padding-left: 9.25vw;
+  padding-right: 9.25vw;
   width: 100%;
   @media (max-width: 425px) {
     padding-bottom: 0px;
@@ -24,7 +25,7 @@ export const Button = styled.button`
   font-size: 1.5rem;
   color: white;
   position: relative;
-  margin-right: 5rem;
+  margin-left: 4rem;
   &::after {
     width: 0%;
     height: 1px;
@@ -45,19 +46,18 @@ export const Button = styled.button`
     }
   }
   @media (max-width: 500px) {
-    margin-right: 2rem;
+    margin-left: 2rem;
   }
 `;
 
 export const TextContainer = styled.div`
   height: 100%;
   margin: 0 auto;
-  max-width: 950px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 9.25vw;
+  padding-right: 9.25vw;
 `;
 
 export const Endtag = styled.div`
@@ -67,8 +67,8 @@ export const Endtag = styled.div`
   align-items: center;
   position: absolute;
   z-index: 20;
-  top: -30px;
-  left: 50px;
+  top: -4.5vh;
+  left: 9.25vw;
   @media (max-width: 768px) {
     width: 70px;
     top: -20px;
@@ -89,7 +89,7 @@ export const RowFirst = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 10vh;
 `;
 
 export const RowSecond = styled.div`
@@ -97,14 +97,14 @@ export const RowSecond = styled.div`
   justify-content: center;
   width: 100%;
   color: white;
-  margin-top: 2rem;
+  margin-top: 4vh;
 `;
 
 export const RowTheerd = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 7vh;
 `;
 
 export const RowFourth = styled.div`
@@ -113,7 +113,7 @@ export const RowFourth = styled.div`
   color: white;
   font-size: 3rem;
   letter-spacing: 0.2rem;
-  margin-top: 5rem;
+  margin-top: 7vh;
   font-family: Helvetica Neue;
   font-weight: 700;
 `;
@@ -123,7 +123,7 @@ export const FirstParagraph = styled.div`
   letter-spacing: 0.2rem;
   margin-top: 1rem;
   font-family: Helvetica Neue;
-  font-weight: 700;
+  font-weight: bold;
   @media (max-width: 900px) {
     font-size: 3rem;
   }
@@ -133,23 +133,24 @@ export const FirstParagraph = styled.div`
 `;
 
 export const SecondParagraph = styled.div`
-  margin-top: 2rem;
   font-size: 2.16rem;
   font-family: Baskerville;
   display: flex;
   justify-content: space-between;
   color: white;
-  font-weight: 300;
-  & > p {
-    width: 48%;
+  font-weight: normal;
+  & p + p {
+    margin-left: 2rem;
   }
+
   @media (max-width: 768px) {
     flex-direction: column;
     & p + p {
-      margin-top: 3rem;
+      margin-top: 4vh;
+      margin-left: 0;
     }
     & > p {
-      width: 80%;
+      font-size: 1.8rem;
     }
   }
   @media (max-width: 425px) {
@@ -162,7 +163,7 @@ export const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   color: white;
-  margin-top: 5rem;
+  margin-top: 7vh;
   padding-bottom: 3rem;
   @media (max-width: 470px) {
     flex-direction: column;

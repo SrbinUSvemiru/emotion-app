@@ -7,18 +7,22 @@ export const Container = styled.div`
   overflow: hidden;
   position: absolute;
   top: 0;
+
+  left: 0;
   margin: 0 auto;
 `;
 
 export const Header = styled(animated.div)`
   width: 100%;
   background: black;
-  padding-left: 50px;
+  padding-top: 4.5vh;
+  padding-left: 9.25vw;
+  padding-right: 9.25vw;
   position: relative;
   z-index: 100;
   & .right {
-    margin-right: 7rem;
     display: flex;
+
     font-weight: 500;
   }
 
@@ -32,9 +36,22 @@ export const Header = styled(animated.div)`
 export const HeaderRow = styled.div`
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
-  padding-top: 50px;
+  @media (max-width: 1000px) {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+  // @media (max-width: 425px) {
+  //   left: 2rem;
+  //   width: 50px;
+  //   top: 0px;
+  // }
+  // @media (max-width: 325px) {
+  //   width: 25px;
+  //   top: 25px;
+  //   left: 1rem;
+  // }
 `;
 
 export const ArrowButtonsRow = styled(animated.div)`
@@ -44,14 +61,21 @@ export const ArrowButtonsRow = styled(animated.div)`
   position: absolute;
   margin: 0 auto;
   left: 0;
-  top: 150%;
+  top: 30vh;
+  @media (max-width: 1000px) {
+    top: 140%;
+  }
 `;
 
 export const HeadingParagraph = styled.div`
   font-weight: 400;
-  margin-left: 20rem;
+  margin-right: 10vw;
   color: white;
   font-size: 1.87rem;
+  @media (max-width: 1000px) {
+    margin-top: 7vh;
+    margin-right: 0;
+  }
 `;
 
 export const Endtag = styled.div`
@@ -61,15 +85,29 @@ export const Endtag = styled.div`
   align-items: center;
   position: absolute;
   z-index: 20;
-  top: -30px;
-  left: 50px;
+  top: -2.5vw;
+  left: 2.6vw;
+  @media (max-width: 768px) {
+    width: 70px;
+    top: -20px;
+  }
+  @media (max-width: 425px) {
+    left: 2rem;
+    width: 50px;
+    top: 0px;
+  }
+  @media (max-width: 325px) {
+    width: 25px;
+    top: 25px;
+    left: 1rem;
+  }
 `;
 
 export const Buttons = styled.div`
   all: unset;
   font-size: 1.5rem;
   color: white;
-  margin-right: 5rem;
+  margin-left: 4rem;
   transition: all 0.1s linear;
   position: relative;
   z-index: 100;
@@ -124,13 +162,11 @@ export const AnimatedParagraph = styled(animated.div)`
 `;
 
 export const Showreel = styled(animated.div)`
-  width: 1600px;
-  height: 1600px;
+  width: 100vw;
+  height: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  padding: 0;
 `;
 
 export const Video = styled(animated.div)`
@@ -143,23 +179,22 @@ export const Video = styled(animated.div)`
   height: 100%;
   position: relative;
   background: black;
-
+  padding-top: 56.25%;
   & #player {
     position: absolute;
-    top: 20%;
-    transform: translate(-50%, -50%);
-    left: 50%;
+    top: -25%;
+    left: 0;
   }
 `;
 
 export const Circles = styled.div`
-  width: 1700px;
-  height: 1700px;
+  width: 109vw;
+  height: 109vw;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 47%;
+  top: 48%;
   transform: translateY(-50%);
   margin: 0 auto;
   z-index: -1;

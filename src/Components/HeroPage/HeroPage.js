@@ -16,6 +16,7 @@ import {
   ArrowButtonsRow,
   AnimatedParagraph,
   Video,
+  PlayerContainer,
 } from "./styled-components";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";
@@ -30,9 +31,11 @@ import {
   animated,
 } from "react-spring";
 import ReactPlayer from "react-player";
+import screenfull from "screenfull";
 
 function HeroPage() {
   const headerRef = useRef();
+  const playerRef = useRef();
   const [controls, setControls] = useState(false);
   const [playing, setPlaying] = useState(true);
   const [playerWidth, setPlayerWidth] = useState(1600);
@@ -84,7 +87,7 @@ function HeroPage() {
     ref: videoRef,
     config: { mass: 1, tension: 280, friction: 60 },
     from: { borderRadius: "50%", y: 0 },
-    to: { borderRadius: "0%", y: -300 },
+    to: { borderRadius: "0%", y: -400 },
   });
 
   useEffect(() => {
@@ -126,6 +129,10 @@ function HeroPage() {
     });
   }, [position]);
 
+  const handleClickFullscreen = () => {
+    screenfull.toggle(playerRef.current.wrapper);
+  };
+
   const handleDownButton = () => {
     springRef.start({
       to: { y: -400 },
@@ -134,9 +141,9 @@ function HeroPage() {
     setPlaying(false);
     setControls(true);
     setTimeout(() => {
-      setPlayerWidth(500);
-      setPlayerHeight(300);
+      handleClickFullscreen();
     }, 500);
+    console.log(playerRef.current);
   };
 
   const paragraph = useSpringRef();
@@ -208,11 +215,11 @@ function HeroPage() {
               url="Reel.mp4"
               playing={playing}
               id="player"
-              controls={true}
               muted={true}
               loop={true}
-              width={playerWidth}
-              height={playerHeight}
+              width="100%"
+              height="100%"
+              ref={playerRef}
             />
           </Video>
 
@@ -224,6 +231,7 @@ function HeroPage() {
             />
           </Circles>
         </Showreel>
+
         <AnimatedParagraph style={z}>
           <p>
             <span>O</span>ne thing that all of us share is our ability to listen
