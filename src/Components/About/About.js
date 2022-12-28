@@ -25,11 +25,11 @@ function About() {
         <Endtag>
           <Lottie animationData={EndtagIcon} loop={false} />
         </Endtag>
-        <Link to="/">
-          <Button>Home</Button>
-        </Link>
         <Link to="/work">
           <Button>Work</Button>
+        </Link>
+        <Link to="/">
+          <Button>Home</Button>
         </Link>
       </Header>
       <RowFirst>

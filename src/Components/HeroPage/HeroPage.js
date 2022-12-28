@@ -72,10 +72,10 @@ function HeroPage() {
   const showreel = useSpring({
     ref: showreelRef,
     config: { mass: 1, tension: 280, friction: 60 },
-    from: { y: -600, scale: "70%", opacity: 0, x: 0 },
+    from: { y: -600, opacity: 0, x: 0 },
     to: {
       y: 250,
-      scale: "100%",
+
       opacity: 1,
       x: 0,
     },

@@ -22,7 +22,6 @@ export const Header = styled(animated.div)`
   z-index: 100;
   & .right {
     display: flex;
-
     font-weight: 500;
   }
 
@@ -72,6 +71,9 @@ export const HeadingParagraph = styled.div`
   margin-right: 10vw;
   color: white;
   font-size: 1.87rem;
+  @media (max-width: 1200px) {
+    margin-right: 2rem;
+  }
   @media (max-width: 1000px) {
     margin-top: 7vh;
     margin-right: 0;
@@ -167,12 +169,15 @@ export const Showreel = styled(animated.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 800px) {
+    width: 1000px;
+    height: 1000px;
+    position: absolute;
+  }
 `;
 
 export const Video = styled(animated.div)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 50%;
   overflow: hidden;
   width: 100%;
@@ -180,6 +185,7 @@ export const Video = styled(animated.div)`
   position: relative;
   background: black;
   padding-top: 56.25%;
+
   & #player {
     position: absolute;
     top: -25%;
