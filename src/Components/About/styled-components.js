@@ -58,6 +58,7 @@ export const TextContainer = styled.div`
   align-items: center;
   padding-left: 9.25vw;
   padding-right: 9.25vw;
+  max-width: 1200px;
 `;
 
 export const Endtag = styled.div`
