@@ -7,7 +7,6 @@ export const Container = styled.div`
   overflow: hidden;
   position: absolute;
   top: 0;
-
   left: 0;
   margin: 0 auto;
 `;
@@ -81,26 +80,22 @@ export const HeadingParagraph = styled.div`
 `;
 
 export const Endtag = styled.div`
-  width: 100px;
+  width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
+  cursor: pointer;
   z-index: 20;
-  top: -2.5vw;
-  left: 2.6vw;
-  @media (max-width: 768px) {
-    width: 70px;
-    top: -20px;
-  }
+  top: -1rem;
+  z-index: 100000;
+  left: 2rem;
   @media (max-width: 425px) {
     left: 2rem;
-    width: 50px;
-    top: 0px;
+    width: 40px;
   }
   @media (max-width: 325px) {
     width: 25px;
-    top: 25px;
     left: 1rem;
   }
 `;
@@ -153,6 +148,7 @@ export const AnimatedParagraph = styled(animated.div)`
   line-height: 1.5;
   display: flex;
   justify-content: space-between;
+
   opacity: 0;
   & > p {
     font-size: 1.2rem;
@@ -194,12 +190,6 @@ export const Showreel = styled(animated.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media (max-width: 800px) {
-    width: 1000px;
-    height: 1000px;
-    position: absolute;
-  }
 `;
 
 export const Video = styled(animated.div)`
@@ -209,12 +199,15 @@ export const Video = styled(animated.div)`
   height: 100%;
   position: relative;
   background: black;
-  padding-top: 56.25%;
-
   & #player {
     position: absolute;
     top: -25%;
     left: 0;
+  }
+  :fullscreen button,
+  ::-webkit-full-screen button {
+    z-index: 1000000;
+    display: block;
   }
 `;
 
@@ -229,11 +222,6 @@ export const Circles = styled.div`
   transform: translateY(-50%);
   margin: 0 auto;
   z-index: -1;
-  @media (max-width: 800px) {
-    width: 1200px;
-    height: 1200px;
-    top: 52%;
-  }
 `;
 
 export const Button = styled.button`

@@ -21,20 +21,23 @@ import EndtagIcon from "../../Endtag.json";
 function About() {
   return (
     <Container>
+      <Endtag>
+        <Lottie animationData={EndtagIcon} loop={false} />
+      </Endtag>
       <Header>
-        <Endtag>
-          <Lottie animationData={EndtagIcon} loop={false} />
-        </Endtag>
-        <Link to="/work">
-          <Button>Work</Button>
-        </Link>
         <Link to="/">
           <Button>Home</Button>
+        </Link>
+        <Link to="/work">
+          <Button>Work</Button>
         </Link>
       </Header>
       <RowFirst>
         <Image>
-          <img src="profilna.png" />
+          <img
+            loading="lazy"
+            src="https://res.cloudinary.com/dcnhluzt1/image/upload/v1734294119/profilna-min_kz1gkp.png"
+          />
         </Image>
       </RowFirst>
       <TextContainer>

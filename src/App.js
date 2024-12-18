@@ -20,11 +20,13 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    setPathName(location.pathname);
+    setPathName(location?.pathname);
   }, [location]);
 
-  const transition = useTransition(location.pathname, {
-    from: { opacity: 0, transform: "translate(0,100% )" },
+  console.log(pathName);
+
+  const transition = useTransition(pathName, {
+    from: { opacity: 0, transform: "translate(0,100%)" },
     enter: { opacity: 1, transform: "translate(0, 0%)" },
     leave: { opacity: 0 },
   });

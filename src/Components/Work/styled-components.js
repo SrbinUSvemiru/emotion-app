@@ -9,26 +9,22 @@ export const Container = styled.div`
 `;
 
 export const Endtag = styled.div`
-  width: 80px;
+  width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
+  cursor: pointer;
   z-index: 20;
-  top: -4.5vh;
-  left: 5vw;
-  @media (max-width: 768px) {
-    width: 50px;
-    top: -10px;
-  }
+  top: -1rem;
+  z-index: 100000;
+  left: 2rem;
   @media (max-width: 425px) {
     left: 2rem;
-    width: 50px;
-    top: 0px;
+    width: 40px;
   }
   @media (max-width: 325px) {
     width: 25px;
-    top: 25px;
     left: 1rem;
   }
 `;
@@ -39,6 +35,7 @@ export const Header = styled.div`
   justify-content: flex-end;
   padding-top: 4.5vh;
   padding-bottom: 7vh;
+  position: relative;
   padding-left: 9.25vw;
   padding-right: 9.25vw;
 `;
@@ -76,6 +73,7 @@ export const Button = styled.div`
 export const GridContainer = styled.div`
   background: black;
   padding: 1rem;
+  width: 100%;
   display: flex;
   justify-content: center;
 `;

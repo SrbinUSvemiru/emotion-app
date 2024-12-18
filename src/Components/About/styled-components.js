@@ -62,26 +62,22 @@ export const TextContainer = styled.div`
 `;
 
 export const Endtag = styled.div`
-  width: 100px;
+  width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
+  cursor: pointer;
   z-index: 20;
-  top: -4.5vh;
-  left: 9.25vw;
-  @media (max-width: 768px) {
-    width: 70px;
-    top: -20px;
-  }
+  top: -1rem;
+  z-index: 100000;
+  left: 2rem;
   @media (max-width: 425px) {
     left: 2rem;
-    width: 50px;
-    top: 0px;
+    width: 40px;
   }
   @media (max-width: 325px) {
     width: 25px;
-    top: 25px;
     left: 1rem;
   }
 `;

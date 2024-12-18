@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import {
   Header,
   Buttons,
@@ -9,44 +12,34 @@ import {
   Circles,
   Button,
   BackButton,
-  Masked,
   Container,
   HeadingParagraph,
   HeaderRow,
   ArrowButtonsRow,
   AnimatedParagraph,
   Video,
-  PlayerContainer,
 } from "./styled-components";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";
 import CirclesJson from "../../idle.json";
 import Beginning from "../../beginning.json";
-import {
-  useSpring,
-  useSpringRef,
-  useChain,
-  config,
-  easings,
-  animated,
-} from "react-spring";
+import { useSpring, useSpringRef, easings, animated } from "react-spring";
 import ReactPlayer from "react-player";
-import screenfull from "screenfull";
+import { Button as MUIButton } from "@mui/material";
 
 function HeroPage() {
-  const headerRef = useRef();
-  const playerRef = useRef();
-  const [controls, setControls] = useState(false);
+  const headerRef = useRef(null);
+  const playerRef = useRef(null);
+  const endtagRef = useRef(null);
+
   const [playing, setPlaying] = useState(true);
-  const [playerWidth, setPlayerWidth] = useState(1600);
-  const [playerHeight, setPlayerHeight] = useState(1600);
-  const [isPaused, setIsPaused] = useState(false);
+
   const [position, setPosition] = useState(false);
 
   const [backButtonActive, setBackButtonActive] = useState(false);
-  const [showreelData, setShowreelData] = useState();
-
-  const springRef = useSpringRef();
+  const [showreelData, setShowreelData] = useState("");
+  const paragraph = useSpringRef(null);
+  const springRef = useSpringRef(null);
   const x = useSpring({
     ref: springRef,
     config: { easing: easings.easeOutCirc },
@@ -72,12 +65,10 @@ function HeroPage() {
   const showreel = useSpring({
     ref: showreelRef,
     config: { mass: 1, tension: 280, friction: 60 },
-    from: { y: -600, opacity: 0, x: 0 },
+    from: { y: -600, opacity: 0 },
     to: {
       y: 250,
-
       opacity: 1,
-      x: 0,
     },
     delay: 1000,
   });
@@ -94,10 +85,21 @@ function HeroPage() {
     setShowreelData(Beginning);
     springRef.start();
     showreelRef.start();
-  }, []);
+  }, [showreelRef, springRef]);
 
   const handleSwitch = () => {
     setShowreelData(CirclesJson);
+  };
+
+  const toggleFullscreen = () => {
+    const playerElement = playerRef.current.wrapper; // Access ReactPlayer DOM node
+    if (playerElement) {
+      if (!document.fullscreenElement) {
+        playerElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
   };
 
   const handlePosition = useCallback(() => {
@@ -111,7 +113,7 @@ function HeroPage() {
       duration: 1500,
     });
     paragraph.start();
-  }, [position]);
+  }, [paragraph, position, showreelRef, springRef]);
 
   const handlePositionBack = useCallback(() => {
     setPosition(!position);
@@ -127,26 +129,24 @@ function HeroPage() {
       to: { opacity: 0, scale: "50%", y: 200, x: 300 },
       delay: 0,
     });
-  }, [position]);
-
-  const handleClickFullscreen = () => {
-    screenfull.toggle(playerRef.current.wrapper);
-  };
+  }, [paragraph, position, showreelRef, springRef]);
 
   const handleDownButton = () => {
+    setShowreelData("");
+
     springRef.start({
-      to: { y: -400 },
+      to: { y: -200, x: -500, opacity: 0 },
+      duration: 1500,
     });
-    videoRef.start();
+
+    videoRef.start(() => ({
+      to: { borderRadius: "0%", y: -400 },
+      onRest: () => toggleFullscreen(),
+    }));
+
     setPlaying(false);
-    setControls(true);
-    setTimeout(() => {
-      handleClickFullscreen();
-    }, 500);
-    console.log(playerRef.current);
   };
 
-  const paragraph = useSpringRef();
   const z = useSpring({
     ref: paragraph,
     config: { easing: easings.easeInOutBack },
@@ -162,7 +162,29 @@ function HeroPage() {
     to: { opacity: backButtonActive ? 0 : 1 },
   });
 
-  // useChain([springRef, showreelRef], [0.3, 2.2]);
+  useEffect(() => {
+    // Event listener for fullscreen changes
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement) {
+        setShowreelData(Beginning);
+        springRef.start({
+          to: { y: 0, x: 0, opacity: 1 },
+          duration: 1500,
+        });
+        videoRef.start({
+          to: { borderRadius: "50%", y: 0, x: 0 },
+        });
+      }
+    };
+
+    // Add fullscreenchange listener
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+
+    // Cleanup listener on component unmount
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
 
   return (
     <Container>
@@ -173,16 +195,12 @@ function HeroPage() {
       >
         Back
       </BackButton>
+      <Endtag onClick={() => endtagRef?.current?.goToAndPlay(0, true)}>
+        <Lottie animationData={EndtagIcon} loop={false} ref={endtagRef} />
+      </Endtag>
 
-      <Header ref={headerRef} style={x}>
+      <Header style={x}>
         <HeaderRow>
-          <Endtag>
-            <Lottie
-              animationData={EndtagIcon}
-              loop={false}
-              isPaused={isPaused}
-            />
-          </Endtag>
           <HeadingParagraph>
             Motion designer that loves telling stories
             <br /> through creative movement and sound
@@ -200,10 +218,10 @@ function HeroPage() {
         <ArrowButtonsRow>
           <animated.div id="arrow-buttons" style={arrowButtons}>
             <Button onClick={handleDownButton} disabled={backButtonActive}>
-              D
+              <ArrowDownwardIcon />
             </Button>
             <Button onClick={handlePosition} disabled={backButtonActive}>
-              R
+              <ArrowForwardIcon />
             </Button>
           </animated.div>
         </ArrowButtonsRow>
@@ -212,13 +230,14 @@ function HeroPage() {
         <Showreel style={showreel}>
           <Video style={videoStyle}>
             <ReactPlayer
-              url="Reel.mp4"
+              url="https://res.cloudinary.com/dcnhluzt1/video/upload/v1734293778/Reel_dueogw.mp4"
               playing={playing}
               id="player"
               muted={true}
               loop={true}
               width="100%"
               height="100%"
+              controls={true}
               ref={playerRef}
             />
           </Video>

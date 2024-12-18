@@ -6,6 +6,7 @@ export const Wrapper = styled(animated.div)`
   top: 0;
   margin: 0 auto;
   width: 100%;
+  overflowy: scroll;
   height: 100%;
   background: black;
 `;
