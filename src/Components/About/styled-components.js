@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background: black;
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  max-width: 1440px;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 `;
 
 export const Header = styled.div`
@@ -69,19 +73,16 @@ export const Endtag = styled.div`
   position: absolute;
   cursor: pointer;
   z-index: 20;
-  top: -1rem;
+  top: -0.5rem;
   z-index: 100000;
-  left: 2rem;
+  left: 0;
+  margin-left: 8vw;
   @media (max-width: 425px) {
-    left: 2rem;
+    top: 0.2rem;
     width: 40px;
   }
-  @media (max-width: 325px) {
-    width: 25px;
-    left: 1rem;
-  }
+  
 `;
-
 export const RowFirst = styled.div`
   display: flex;
   width: 100%;

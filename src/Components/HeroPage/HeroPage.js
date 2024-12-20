@@ -28,7 +28,7 @@ import ReactPlayer from "react-player";
 import { Button as MUIButton } from "@mui/material";
 
 function HeroPage() {
-  const headerRef = useRef(null);
+ 
   const playerRef = useRef(null);
   const endtagRef = useRef(null);
 
@@ -177,10 +177,10 @@ function HeroPage() {
       }
     };
 
-    // Add fullscreenchange listener
+    
     document.addEventListener("fullscreenchange", handleFullscreenChange);
 
-    // Cleanup listener on component unmount
+    
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
@@ -235,8 +235,8 @@ function HeroPage() {
               id="player"
               muted={true}
               loop={true}
-              width="100%"
-              height="100%"
+              width="140%"
+              height="140%"
               controls={true}
               ref={playerRef}
             />

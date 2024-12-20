@@ -6,8 +6,10 @@ export const Container = styled.div`
   height: 100vh;
   overflow: hidden;
   position: absolute;
+  max-width: 1440px;
   top: 0;
   left: 0;
+  right: 0;
   margin: 0 auto;
 `;
 
@@ -87,17 +89,15 @@ export const Endtag = styled.div`
   position: absolute;
   cursor: pointer;
   z-index: 20;
-  top: -1rem;
+  top: -0.5rem;
   z-index: 100000;
-  left: 2rem;
+  left: 0;
+  margin-left: 8vw;
   @media (max-width: 425px) {
-    left: 2rem;
+    top: 0.2rem;
     width: 40px;
   }
-  @media (max-width: 325px) {
-    width: 25px;
-    left: 1rem;
-  }
+  
 `;
 
 export const Buttons = styled.div`
@@ -201,13 +201,9 @@ export const Video = styled(animated.div)`
   background: black;
   & #player {
     position: absolute;
-    top: -25%;
-    left: 0;
-  }
-  :fullscreen button,
-  ::-webkit-full-screen button {
-    z-index: 1000000;
-    display: block;
+    top: -32%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `;
 
