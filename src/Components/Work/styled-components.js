@@ -1,43 +1,16 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  position: absolute;
-  max-width: 1440px;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-`;
 
-export const Endtag = styled.div`
-  width: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  cursor: pointer;
-  z-index: 20;
-  top: -0.5rem;
-  z-index: 100000;
-  left: 0;
-  margin-left: 8vw;
-  @media (max-width: 425px) {
-    top: 0.2rem;
-    width: 40px;
-  }
-  
-`;
 
 export const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
   padding-top: 4.5vh;
-  padding-bottom: 7vh;
-  position: relative;
+  padding-bottom: 5vh;
+  position: fixed;
+  background: black;
+  z-index: 100;
   padding-left: 9.25vw;
   padding-right: 9.25vw;
 `;
@@ -74,6 +47,7 @@ export const Button = styled.div`
 
 export const GridContainer = styled.div`
   background: black;
+  margin-top: 11.5vh;
   padding: 2rem;
   width: 100%;
   display: flex;

@@ -1,9 +1,7 @@
 import React from "react";
 import {
-  Container,
   Header,
   Button,
-  Endtag,
   RowFirst,
   Image,
   RowSecond,
@@ -14,6 +12,7 @@ import {
   TextContainer,
   Footer,
 } from "./styled-components";
+import { Endtag, Container } from "../../styled-components";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";

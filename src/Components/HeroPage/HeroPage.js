@@ -1,36 +1,36 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import {
   Header,
   Buttons,
   Hero,
   Showreel,
-  Endtag,
   Circles,
   Button,
   BackButton,
-  Container,
   HeadingParagraph,
   HeaderRow,
   ArrowButtonsRow,
   AnimatedParagraph,
   Video,
 } from "./styled-components";
+import { Endtag, Container } from "../../styled-components";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";
 import CirclesJson from "../../idle.json";
 import Beginning from "../../beginning.json";
 import { useSpring, useSpringRef, easings, animated } from "react-spring";
 import ReactPlayer from "react-player";
-import { Button as MUIButton } from "@mui/material";
+import { useBreakpoint } from "../../Hooks/useBreakpoint";
+
 
 function HeroPage() {
  
   const playerRef = useRef(null);
   const endtagRef = useRef(null);
+  const {isXs} = useBreakpoint()
 
   const [playing, setPlaying] = useState(true);
 
@@ -187,7 +187,7 @@ function HeroPage() {
   }, []);
 
   return (
-    <Container>
+    <Container style={{ overflowY: backButtonActive && isXs ?  "scroll" : "hidden", overflowX: "hidden" }}>
       <BackButton
         style={backButton}
         onClick={handlePositionBack}
