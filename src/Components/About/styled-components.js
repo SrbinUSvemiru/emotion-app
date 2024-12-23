@@ -1,13 +1,18 @@
 import styled from "styled-components";
+import { animated } from "react-spring";
 
 
 
 export const Header = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding-top: 4.5vh;
+  padding-top: 2.3rem;
+  padding-bottom: 2.3rem;
   padding-left: 9.25vw;
+  background: black;
   padding-right: 9.25vw;
+  z-index: 100;
+  position: fixed;
   width: 100%;
   @media (max-width: 425px) {
     padding-bottom: 0px;
@@ -56,35 +61,36 @@ export const TextContainer = styled.div`
 `;
 
 
-export const RowFirst = styled.div`
+export const RowFirst = styled(animated.div)`
   display: flex;
   width: 100%;
   justify-content: center;
-  margin-top: 10vh;
+  padding-top: 12rem;
 `;
 
-export const RowSecond = styled.div`
+export const RowSecond = styled(animated.div)`
   display: flex;
   justify-content: center;
   width: 100%;
   color: white;
-  margin-top: 4vh;
+  padding-top: 8rem;
 `;
 
-export const RowTheerd = styled.div`
+export const RowTheerd = styled(animated.div)`
   display: flex;
   width: 100%;
   justify-content: center;
-  margin-top: 7vh;
+  padding-top: 8rem;
 `;
 
 export const RowFourth = styled.div`
   display: flex;
   width: 100%;
   color: white;
+  margin-top: 8rem;
   font-size: 3rem;
   letter-spacing: 0.2rem;
-  margin-top: 7vh;
+  padding-top: 8rem;
   font-family: Helvetica Neue;
   font-weight: 700;
 `;
@@ -92,7 +98,7 @@ export const RowFourth = styled.div`
 export const FirstParagraph = styled.div`
   font-size: 4rem;
   letter-spacing: 0.2rem;
-  margin-top: 1rem;
+  padding-top: 1rem;
   font-family: Helvetica Neue;
   font-weight: bold;
   @media (max-width: 900px) {
@@ -134,7 +140,7 @@ export const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   color: white;
-  margin-top: 7vh;
+  margin-top: 5rem;
   padding-bottom: 3rem;
   @media (max-width: 470px) {
     flex-direction: column;

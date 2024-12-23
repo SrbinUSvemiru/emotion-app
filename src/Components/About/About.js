@@ -16,10 +16,52 @@ import { Endtag, Container } from "../../styled-components";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";
+import { useInView } from "@react-spring/web";
 
 function About() {
+
+  const [ref, springs] = useInView(
+    () => ({
+      from: {
+        opacity: 0,
+        x: 100,
+      },
+      to: {
+        opacity: 1,
+        x: 0,
+      },
+    }),
+    { rootMargin: "100% 0%", threshold: 0.5}
+  );
+  const [refSecond, springsSecond] = useInView(
+    () => ({
+      from: {
+        opacity: 0,
+        x: 100,
+      },
+      to: {
+        opacity: 1,
+        x: 0,
+      },
+    }),
+    { rootMargin: "100% 0%", threshold: 0.3 }
+  );
+
+  const [refThird, springsThird] = useInView(
+    () => ({
+      from: {
+        opacity: 0,
+        x: 100,
+      },
+      to: {
+        opacity: 1,
+        x: 0,
+      },
+    }),
+    { rootMargin: "100% 0%", threshold: 0.3 }
+  );
   return (
-    <Container>
+    <Container style={{ backgroundColor: "black", overflowx: "hidden", overflowy: "scroll" }}>
       <Endtag>
         <Lottie animationData={EndtagIcon} loop={false} />
       </Endtag>
@@ -31,7 +73,7 @@ function About() {
           <Button>Work</Button>
         </Link>
       </Header>
-      <RowFirst>
+      <RowFirst ref={ref} style={springs}>
         <Image>
           <img
             loading="lazy"
@@ -40,7 +82,7 @@ function About() {
         </Image>
       </RowFirst>
       <TextContainer>
-        <RowSecond>
+        <RowSecond ref={refSecond} style={springsSecond}>
           <FirstParagraph>
             <p>
               I help businesses and non-profits in creating a meaningful and
@@ -49,7 +91,7 @@ function About() {
             </p>
           </FirstParagraph>
         </RowSecond>
-        <RowTheerd>
+        <RowTheerd ref={refThird} style={springsThird}>
           <SecondParagraph>
             <p>
               I love the quest for the golden thread - fabric that binds the

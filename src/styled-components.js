@@ -23,12 +23,12 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-export const Endtag = styled.div`
+export const Endtag = styled(animated.div)`
   width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   cursor: pointer;
   z-index: 20;
   top: -0.5rem;
@@ -41,3 +41,5 @@ export const Endtag = styled.div`
   }
   
 `;
+
+

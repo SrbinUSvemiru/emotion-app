@@ -6,13 +6,14 @@ export const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding-top: 4.5vh;
-  padding-bottom: 5vh;
+  padding-top: 2.3rem;
+  padding-bottom: 2.3rem;
+  padding-left: 9.25vw;
+  padding-right: 9.25vw;
   position: fixed;
   background: black;
   z-index: 100;
-  padding-left: 9.25vw;
-  padding-right: 9.25vw;
+
 `;
 
 export const Button = styled.div`

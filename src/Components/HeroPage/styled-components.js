@@ -6,7 +6,7 @@ import { animated } from "react-spring";
 export const Header = styled(animated.div)`
   width: 100%;
   background: black;
-  padding-top: 4.5vh;
+  padding-top: 2.3rem;
   padding-left: 9.25vw;
   padding-right: 9.25vw;
   position: relative;
@@ -113,46 +113,15 @@ export const Hero = styled(animated.div)`
 export const AnimatedParagraph = styled(animated.div)`
   position: absolute;
   color: white;
-  max-width: 630px;
   top: 15%;
-  right: 20%;
-  font-size: 1rem;
-  line-height: 1.5;
+  width: 80%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 0;
   display: flex;
-  justify-content: space-between;
   opacity: 0;
-  & > p {
-    font-size: 1.2rem;
-    max-width: 300px;
-    & > span {
-      font-weight: 900;
-    }
-  }
-  & p + p {
-    margin-left: 2rem;
-  }
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    right: 5%;
-    top: -10%;
-    width: 100%;
-    & p + p {
-      margin-left: 0;
-      margin-top: 2rem;
-    }
-  }
-
-  @media (max-width: 400px) {
-    flex-direction: column;
-    right: 15%;
-    top: -13%;
-    width: 100%;
-    & p + p {
-      margin-left: 0;
-      margin-top: 2rem;
-    }
-  }
+  margin-bottom: 5rem;
 `;
 
 export const Showreel = styled(animated.div)`
@@ -161,6 +130,7 @@ export const Showreel = styled(animated.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 export const Video = styled(animated.div)`

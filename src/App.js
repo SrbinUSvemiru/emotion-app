@@ -16,18 +16,16 @@ import About from "./Components/About/About";
 import "./index.css";
 
 function App() {
-  const [pathName, setPathName] = useState();
+  
   const location = useLocation();
 
-  useEffect(() => {
-    setPathName(location?.pathname);
-  }, [location]);
+  
 
-  console.log(pathName);
+  
 
-  const transition = useTransition(pathName, {
-    from: { opacity: 0, transform: "translate(0,100%)" },
-    enter: { opacity: 1, transform: "translate(0, 0%)" },
+  const transition = useTransition(location?.pathname, {
+    from: { opacity: 0, transform: "translate(0%,100%)" },
+    enter: { opacity: 1, transform: "translate(0%, 0%)" },
     leave: { opacity: 0 },
   });
 

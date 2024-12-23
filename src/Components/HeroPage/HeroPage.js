@@ -16,6 +16,7 @@ import {
   AnimatedParagraph,
   Video,
 } from "./styled-components";
+import { Typography } from "@mui/material";
 import { Endtag, Container } from "../../styled-components";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";
@@ -29,11 +30,11 @@ import { useBreakpoint } from "../../Hooks/useBreakpoint";
 function HeroPage() {
  
   const playerRef = useRef(null);
-  const endtagRef = useRef(null);
-  const {isXs} = useBreakpoint()
+  
+  const {isXs, isMd, isLg} = useBreakpoint()
 
   const [playing, setPlaying] = useState(true);
-
+  const [isMutet, setIsMuted] = useState(true);
   const [position, setPosition] = useState(false);
 
   const [backButtonActive, setBackButtonActive] = useState(false);
@@ -92,7 +93,7 @@ function HeroPage() {
   };
 
   const toggleFullscreen = () => {
-    const playerElement = playerRef.current.wrapper; // Access ReactPlayer DOM node
+    const playerElement = playerRef.current.wrapper; 
     if (playerElement) {
       if (!document.fullscreenElement) {
         playerElement.requestFullscreen();
@@ -126,7 +127,7 @@ function HeroPage() {
       duration: 1500,
     });
     paragraph.start({
-      to: { opacity: 0, scale: "50%", y: 200, x: 300 },
+      to: { opacity: 0, scale: "50%", y: 200,  },
       delay: 0,
     });
   }, [paragraph, position, showreelRef, springRef]);
@@ -145,13 +146,14 @@ function HeroPage() {
     }));
 
     setPlaying(false);
+    setIsMuted(false);
   };
 
   const z = useSpring({
     ref: paragraph,
     config: { easing: easings.easeInOutBack },
-    from: { opacity: 0, scale: "50%", y: 200, x: 300 },
-    to: { opacity: 1, scale: "100%", y: -50, x: 100 },
+    from: { opacity: 0, scale: "50%", y: 200,  },
+    to: { opacity: 1, scale: "100%", y: -50,  },
     delay: 100,
     duration: 1000,
   });
@@ -167,6 +169,7 @@ function HeroPage() {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) {
         setShowreelData(Beginning);
+        setIsMuted(true);
         springRef.start({
           to: { y: 0, x: 0, opacity: 1 },
           duration: 1500,
@@ -195,15 +198,17 @@ function HeroPage() {
       >
         Back
       </BackButton>
-      <Endtag onClick={() => endtagRef?.current?.goToAndPlay(0, true)}>
-        <Lottie animationData={EndtagIcon} loop={false} ref={endtagRef} />
+      <Endtag style={x}>
+        <Lottie animationData={EndtagIcon} loop={false}  />
       </Endtag>
 
       <Header style={x}>
         <HeaderRow>
           <HeadingParagraph>
+            <Typography variant={isLg ? "h4" : "h5"}>
             Motion designer that loves telling stories
             <br /> through creative movement and sound
+            </Typography>
           </HeadingParagraph>
           <div className="right">
             <Link to="/work">
@@ -227,13 +232,30 @@ function HeroPage() {
         </ArrowButtonsRow>
       </Header>
       <Hero>
+      <AnimatedParagraph style={{...z, display: "flex", flexDirection: isXs ? "column" : "row", paddingLeft:  isLg ? "20rem" : isMd ? "5rem" : "0rem"}}>
+          <Typography variant="h6">
+            <span>O</span>ne thing that all of us share is our ability to listen
+            to and tell them. Life is a stream full of various beautiful ones,
+            tiny and large. They hold a pristine power to transform an inspire
+            our perspective. They are the strands that connect us all with the
+            stars in our eyes and the corners of our smile. The warm light
+            inside the simple wooden home amidst the harsh snowy winter.
+          </Typography>
+          <Typography variant="h6" sx={{marginLeft: isXs ? '0rem' : '2rem', marginTop: isXs ? '2rem' : '0rem'}}>
+            On the brisk breeze that makes us close our eyes for a moment, on
+            those hot summer days, Through them we can shape, lighten, give
+            purpose, connect, befriend and amaze... And sometimes if we are
+            lucky, bring pqople together. We all live them, but if we put our
+            heart and mind to it, there is a chance to tell a wonderful story.
+          </Typography>
+        </AnimatedParagraph>
         <Showreel style={showreel}>
           <Video style={videoStyle}>
             <ReactPlayer
               url="https://res.cloudinary.com/dcnhluzt1/video/upload/v1734293778/Reel_dueogw.mp4"
               playing={playing}
               id="player"
-              muted={true}
+              muted={isMutet}
               loop={true}
               width="140%"
               height="140%"
@@ -251,23 +273,7 @@ function HeroPage() {
           </Circles>
         </Showreel>
 
-        <AnimatedParagraph style={z}>
-          <p>
-            <span>O</span>ne thing that all of us share is our ability to listen
-            to and tell them. Life is a stream full of various beautiful ones,
-            tiny and large. They hold a pristine power to transform an inspire
-            our perspective. They are the strands that connect us all with the
-            stars in our eyes and the corners of our smile. The warm light
-            inside the simple wooden home amidst the harsh snowy winter.
-          </p>
-          <p>
-            On the brisk breeze that makes us close our eyes for a moment, on
-            those hot summer days, Through them we can shape, lighten, give
-            purpose, connect, befriend and amaze... And sometimes if we are
-            lucky, bring pqople together. We all live them, but if we put our
-            heart and mind to it, there is a chance to tell a wonderful story.
-          </p>
-        </AnimatedParagraph>
+        
       </Hero>
     </Container>
   );
