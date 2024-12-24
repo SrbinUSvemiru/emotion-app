@@ -1,1 +1,16 @@
-const API = "563492ad6f917000010000016c6d69bb679049b48df590da6a3194fd";
+export const getStorageItem = (key, defaultValue) => {
+	try {
+		const item = window?.localStorage?.getItem(key);
+		if (item) {
+			return JSON.parse(item);
+		} else {
+			return defaultValue;
+		}
+	} catch (e) {
+		return defaultValue;
+	}
+};
+
+export const setStorageItem = (key, value) => {
+	window?.localStorage?.setItem(key, JSON.stringify(value));
+};

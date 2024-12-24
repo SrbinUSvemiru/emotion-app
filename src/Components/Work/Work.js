@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid, Box, Typography } from "@mui/material";
 import { useInView, animated } from "@react-spring/web";
 import {
-  GridContainer,
   Card,
   Header,
-  Button,
+  
 } from "./styled-components";
 import { Endtag, Container } from "../../styled-components";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";
+import { getStorageItem, setStorageItem } from "../../Utils/Utils";
 
 const AnimatedGrid = animated(Grid);
 
@@ -29,6 +29,8 @@ function Column({ index, item }) {
     { rootMargin: "0%" }
   );
 
+  
+
   return (
     <AnimatedGrid
       item
@@ -39,7 +41,8 @@ function Column({ index, item }) {
       sx={{
         display: "flex",
         alignItems: "start",
-        height: "fit-content",
+        width: "fit-content",
+        
       }}
     >
       <Card>
@@ -47,15 +50,17 @@ function Column({ index, item }) {
           src={item}
           loading="lazy"
           alt={`GIF ${index + 1}`}
-          style={{ maxWidth: "100%" }}
+          style={{ minWidth: "100%",  }}
         />
       </Card>
     </AnimatedGrid>
   );
 }
 
-function Work() {
+function Work({handleEndtagClick}) {
   const [data, setData] = useState([]);
+
+  
 
   useEffect(() => {
     setData({
@@ -82,19 +87,59 @@ function Work() {
   }, []);
 
   return (
-    <Container>
-      <Endtag>
+    <Container style={{backgroundColor: 'background.default'}}>
+      <Endtag onClick={handleEndtagClick}>
         <Lottie animationData={EndtagIcon} loop={false} />
       </Endtag>
       <Header>
         <Link to="/">
-          <Button>Home</Button>
+          <Typography variant="h5" sx={{marginLeft: '1rem', position: 'relative', '&::after': {
+    width: '0%',
+    height: '1px',
+    backgroundColor: 'text.primary',
+    content: '""',
+    position: 'absolute',
+    bottom: 0,
+    transition: 'all 0.1 ease',
+    '-webkit-transition': 'width 0.2s',
+    left: '50%',
+    transform: 'translate(-50%, 0)',
+  },
+  '&:hover' :{
+    cursor: 'pointer',
+    '&::after': {
+      width: '100%'
+    }
+  }}} >Home</Typography>
         </Link>
         <Link to="/about">
-          <Button>About</Button>
+       
+          <Typography variant="h5" sx={{marginLeft: '3rem', position: 'relative', '&::after': {
+    width: '0%',
+    height: '1px',
+    backgroundColor: 'text.primary',
+    content: '""',
+    position: 'absolute',
+    bottom: 0,
+    transition: 'all 0.1 ease',
+    '-webkit-transition': 'width 0.2s',
+    left: '50%',
+    transform: 'translate(-50%, 0)',
+  },
+  '&:hover' :{
+    cursor: 'pointer',
+    '&::after': {
+      width: '100%'
+    }
+  }}}>About</Typography>
+          
         </Link>
       </Header>
-      <GridContainer>
+      <Box sx={{backgroundColor: 'background.default',  marginTop: '5rem',
+  padding: '2rem',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center'}}>
         <Grid
           container
           spacing={3}
@@ -118,18 +163,26 @@ function Work() {
               <Column item={card} index={index} />
             ))}
           </Grid>
-          <Grid size={{ sx: 1, md: 4 }} container spacing={3}>
+          <Grid size={{ sx: 1, md: 4 }} sx={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }} container spacing={3}>
             {data?.gridTwo?.map((card, index) => (
               <Column item={card} index={index} />
             ))}
           </Grid>
-          <Grid size={{ sx: 1, md: 4 }} container spacing={3}>
+          <Grid size={{ sx: 1, md: 4 }} sx={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }} container spacing={3}>
             {data?.gridThree?.map((card, index) => (
               <Column item={card} index={index} />
             ))}
           </Grid>
         </Grid>
-      </GridContainer>
+      </Box>
     </Container>
   );
 }

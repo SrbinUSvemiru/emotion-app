@@ -2,24 +2,23 @@ import styled from "styled-components";
 
 
 
+
 export const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
   padding-top: 2.3rem;
-  padding-bottom: 2.3rem;
+  padding-bottom: 4rem;
   padding-left: 9.25vw;
   padding-right: 9.25vw;
   position: fixed;
-  background: black;
-  z-index: 100;
+  background: ${({theme}) =>  theme?.palette?.mode === 'dark' ? 'linear-gradient(180deg, rgba(0,0,0,1) 64%, rgba(0,0,0,0.6041010154061625) 80%, rgba(0,0,0,0.1727284663865546) 89%, rgba(0,0,0,0.043876925770308106) 96%, rgba(0,0,0,0) 100%)' : 'linear-gradient(180deg, rgba(255,255,255,1) 64%, rgba(255,255,255,0.6041010154061625) 80%, rgba(255,255,255,0.1727284663865546) 89%, rgba(255,255,255,0.043876925770308106) 96%, rgba(0,0,0,0) 100%)'};
+  z-index: 1000;
 
 `;
 
 export const Button = styled.div`
   all: unset;
-  font-size: 1.5rem;
-  color: white;
   position: relative;
   margin-left: 4rem;
   &::after {
@@ -46,20 +45,12 @@ export const Button = styled.div`
   }
 `;
 
-export const GridContainer = styled.div`
-  background: black;
-  margin-top: 11.5vh;
-  padding: 2rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
+
 
 export const Card = styled.div`
   width: 100%;
-
   display: flex;
   & > img {
-    width: 100%;
+    width: 50%;
   }
 `;

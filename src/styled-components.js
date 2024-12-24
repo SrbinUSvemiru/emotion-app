@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { animated } from "react-spring";
+import { Box } from "@mui/material";
 
 export const Wrapper = styled(animated.div)`
   position: absolute;
@@ -8,15 +9,15 @@ export const Wrapper = styled(animated.div)`
   width: 100%;
   overflowy: scroll;
   height: 100%;
-  background: black;
+  
 `;
 
-export const Container = styled.div`
+export const Container = styled(Box)`
   width: 100vw;
   height: 100vh;
   overflow: scroll;
+  background: ${({theme}) =>  theme?.palette?.background?.default};
   position: absolute;
-  max-width: 1440px;
   top: 0;
   left: 0;
   right: 0;

@@ -5,22 +5,13 @@ import { animated } from "react-spring";
 
 export const Header = styled(animated.div)`
   width: 100%;
-  background: black;
+   background: ${({theme}) =>  theme?.palette?.background?.default};
   padding-top: 2.3rem;
   padding-left: 9.25vw;
   padding-right: 9.25vw;
   position: relative;
   z-index: 100;
-  & .right {
-    display: flex;
-    font-weight: 500;
-  }
-
-  & #arrow-buttons {
-    display: flex;
-    width: 130px;
-    justify-content: space-between;
-  }
+  
 `;
 
 export const HeaderRow = styled.div`
@@ -60,8 +51,6 @@ export const ArrowButtonsRow = styled(animated.div)`
 export const HeadingParagraph = styled.div`
   font-weight: 400;
   margin-right: 10vw;
-  color: white;
-  font-size: 1.87rem;
   @media (max-width: 1200px) {
     margin-right: 2rem;
   }
@@ -112,7 +101,6 @@ export const Hero = styled(animated.div)`
 
 export const AnimatedParagraph = styled(animated.div)`
   position: absolute;
-  color: white;
   top: 15%;
   width: 80%;
   left: 0;
@@ -127,10 +115,13 @@ export const AnimatedParagraph = styled(animated.div)`
 export const Showreel = styled(animated.div)`
   width: 100vw;
   height: 100vw;
+  max-width: 1500px;
+  max-height: 1500px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+
 `;
 
 export const Video = styled(animated.div)`
@@ -151,6 +142,8 @@ export const Video = styled(animated.div)`
 export const Circles = styled.div`
   width: 109vw;
   height: 109vw;
+  max-width: 1700px;
+  max-height: 1700px;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -175,7 +168,6 @@ export const Button = styled.button`
 
 export const BackButton = styled(animated.button)`
   all: unset;
-  color: white;
   font-size: 1.5rem;
   cursor: pointer;
   position: absolute;

@@ -4,34 +4,38 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import {
   Header,
-  Buttons,
   Hero,
   Showreel,
   Circles,
-  Button,
-  BackButton,
   HeadingParagraph,
   HeaderRow,
   ArrowButtonsRow,
   AnimatedParagraph,
   Video,
 } from "./styled-components";
-import { Typography } from "@mui/material";
+import { IconButton, Typography, useTheme, Box } from "@mui/material";
 import { Endtag, Container } from "../../styled-components";
 import Lottie from "lottie-react";
 import EndtagIcon from "../../Endtag.json";
 import CirclesJson from "../../idle.json";
 import Beginning from "../../beginning.json";
-import { useSpring, useSpringRef, easings, animated } from "react-spring";
+import { useSpring, useSpringRef, easings } from "react-spring";
+import {animated} from '@react-spring/web'
 import ReactPlayer from "react-player";
 import { useBreakpoint } from "../../Hooks/useBreakpoint";
 
 
-function HeroPage() {
+const AnimatedTypography = animated(Typography);
+
+function HeroPage({handleEndtagClick}) {
  
   const playerRef = useRef(null);
   
   const {isXs, isMd, isLg} = useBreakpoint()
+
+  const muiTheme = useTheme()
+
+ 
 
   const [playing, setPlaying] = useState(true);
   const [isMutet, setIsMuted] = useState(true);
@@ -107,6 +111,7 @@ function HeroPage() {
     setPosition(!position);
     setBackButtonActive(true);
     showreelRef.start({
+      from: { y: 250, x: 0, scale: "100%" },
       to: { y: -100, x: -900, scale: "90%" },
     });
     springRef.start({
@@ -164,6 +169,8 @@ function HeroPage() {
     to: { opacity: backButtonActive ? 0 : 1 },
   });
 
+  
+
   useEffect(() => {
     // Event listener for fullscreen changes
     const handleFullscreenChange = () => {
@@ -191,14 +198,30 @@ function HeroPage() {
 
   return (
     <Container style={{ overflowY: backButtonActive && isXs ?  "scroll" : "hidden", overflowX: "hidden" }}>
-      <BackButton
-        style={backButton}
-        onClick={handlePositionBack}
-        disabled={!backButtonActive}
-      >
-        Back
-      </BackButton>
-      <Endtag style={x}>
+     <AnimatedTypography variant="h5"  style={backButton}
+      onClick={handlePositionBack}
+      disabled={!backButtonActive} sx={{position: 'absolute',
+        zIndex: 1,
+        right: '8rem',
+        top: '3rem', '&::after': {
+          width: '0%',
+          height: '1px',
+          backgroundColor: 'text.primary',
+          content: '""',
+          position: 'absolute',
+          bottom: 0,
+          transition: 'all 0.1 ease',
+          '-webkit-transition': 'width 0.2s',
+          left: '50%',
+          transform: 'translate(-50%, 0)',
+        },
+        '&:hover' :{
+          cursor: 'pointer',
+          '&::after': {
+            width: '100%'
+          }
+        }}}>Back</AnimatedTypography>
+      <Endtag style={x} onClick={handleEndtagClick}>
         <Lottie animationData={EndtagIcon} loop={false}  />
       </Endtag>
 
@@ -210,28 +233,62 @@ function HeroPage() {
             <br /> through creative movement and sound
             </Typography>
           </HeadingParagraph>
-          <div className="right">
+         <Box sx={{display: 'flex', alignItems: 'center'}}>
             <Link to="/work">
-              <Buttons>Work</Buttons>
+              <Typography variant="h5" sx={{ position: 'relative', '&::after': {
+                 width: '0%',
+                 height: '1px',
+                 backgroundColor: 'text.primary',
+                 content: '""',
+                 position: 'absolute',
+                 bottom: 0,
+                 transition: 'all 0.1 ease',
+                 '-webkit-transition': 'width 0.2s',
+                 left: '50%',
+                 transform: 'translate(-50%, 0)',
+               },
+               '&:hover' :{
+                 cursor: 'pointer',
+                 '&::after': {
+                   width: '100%'
+                 }
+               }}} >Work</Typography>
             </Link>
             <Link to="/about">
-              <Buttons>About</Buttons>
+               <Typography variant="h5" sx={{marginLeft: '3rem', position: 'relative', '&::after': {
+                  width: '0%',
+                  height: '1px',
+                  backgroundColor: 'text.primary',
+                  content: '""',
+                  position: 'absolute',
+                  bottom: 0,
+                  transition: 'all 0.1 ease',
+                  '-webkit-transition': 'width 0.2s',
+                  left: '50%',
+                  transform: 'translate(-50%, 0)',
+                },
+                '&:hover' :{
+                  cursor: 'pointer',
+                  '&::after': {
+                    width: '100%'
+                  }
+                }}} >About</Typography>
             </Link>
-          </div>
+            </Box>
         </HeaderRow>
 
         <ArrowButtonsRow>
           <animated.div id="arrow-buttons" style={arrowButtons}>
-            <Button onClick={handleDownButton} disabled={backButtonActive}>
+            <IconButton onClick={handleDownButton} disabled={backButtonActive} sx={{color: 'text.primary'}}>
               <ArrowDownwardIcon />
-            </Button>
-            <Button onClick={handlePosition} disabled={backButtonActive}>
-              <ArrowForwardIcon />
-            </Button>
+            </IconButton>
+            <IconButton onClick={handlePosition} disabled={backButtonActive} sx={{color: 'text.primary'}}>
+              <ArrowForwardIcon  />
+            </IconButton>
           </animated.div>
         </ArrowButtonsRow>
       </Header>
-      <Hero>
+      <Hero style={{backgroundColor: muiTheme?.palette?.background?.default}}>
       <AnimatedParagraph style={{...z, display: "flex", flexDirection: isXs ? "column" : "row", paddingLeft:  isLg ? "20rem" : isMd ? "5rem" : "0rem"}}>
           <Typography variant="h6">
             <span>O</span>ne thing that all of us share is our ability to listen
